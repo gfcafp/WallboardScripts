@@ -1,0 +1,13 @@
+$username = "BrugernavnE" # Brugernavn tl lokal konto
+$password = ConvertTo-SecureString "XXXXXXXXXXXXX" -AsPlainText -Force # Password til lokal konto
+$RegPath = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
+
+ 
+
+New-LocalUser -Name "$username" -Password $password -FullName "$username" -Description "MNIE Var her"
+
+ 
+
+Set-ItemProperty $RegPath "AutoAdminLogon" -Value "1" -type String
+Set-ItemProperty $RegPath "DefaultUsername" -Value "$username" -type String
+Set-ItemProperty $RegPath "DefaultPassword" -Value "$password" -type String
